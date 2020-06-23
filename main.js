@@ -1,22 +1,21 @@
 const body = document.querySelector("body")
-const textFlips = document.createElement("div")
-textFlips.id = "text"
-const imgFlips = document.createElement("div")
-imgFlips.id = "images"
-body.append(textFlips)
-body.append(imgFlips)
+const textDiv = document.createElement("div")
+textDiv.id = "text"
+const imgDiv = document.createElement("div")
+imgDiv.id = "images"
+body.append(textDiv)
+body.append(imgDiv)
+const disclaimer = document.createElement("p")
+disclaimer.append("The text flips and image flips are separate functions and will not correspond to each other")
+body.append(disclaimer)
 
 let coin = {
     state: 0,
     flip: function() {
         /* 1. Randomly set your coin object's "state" property to be either 
            0 or 1: use "this.state" to access the "state" property on this object.*/
-        let flip = Math.random()
-        if (flip < 0.5) {
-            this.state = 0
-        } else {
-            this.state = 1
-        }
+        let coinFlip = Math.floor(Math.random()*2)
+        this.state = coinFlip
         return this.state
     },
     toString: function() {
@@ -47,10 +46,10 @@ display20Flips()
 
 function display20Flips () {
     for (let flips = 1; flips <= 20; flips++) {
-        let string = document.createElement('p')
+        let flipText = document.createElement('p')
         coin.flip()
-        string.append(coin.toString())
-        textFlips.append(string)
+        flipText.append(coin.toString())
+        textDiv.append(flipText)
     }
 }
 
@@ -59,10 +58,6 @@ display20Images()
 function display20Images() {
     for (let flips = 1; flips <= 20; flips++) {
         coin.flip()
-        imgFlips.append(coin.toHTML())
+        imgDiv.append(coin.toHTML())
     }
 }
-
-const disclaimer = document.createElement("p")
-disclaimer.append("The text flips and image flips are separate functions and will not correspond to each other")
-body.append(disclaimer)
